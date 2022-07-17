@@ -21,6 +21,10 @@ import sys
 
 
 def josephus(N: int, M: int, x: int, D: str) -> None:
+    # Display Args:
+    sys.stdout.write("N: " + str(N) + ", M: " + str(M) +
+                     ", x: " + str(x) + ", D: " + D + "\n")
+
     # create our circle
     circle = CircularLinkedList()
 
