@@ -28,7 +28,6 @@ Explanation: Your function can return either index number 1 where the peak eleme
 def findPeak(nums: list[int]) -> int:
     start = 0
     end = len(nums) - 1
-    mid = end // 2
 
     while start < end:
         mid = (start + end) // 2
