@@ -49,3 +49,18 @@ def parent(i):
 a = [None, 1, 2, 3, 4, 5, 6, 7]
 buildMaxHeap(a)
 print(a)
+
+
+'''
+OUTPUT
+
+Array Representation
+[None, 7, 5, 6, 4, 2, 1, 3]
+
+Tree Representation:
+
+        7
+     5     6
+    4 2   1 3 
+
+'''
