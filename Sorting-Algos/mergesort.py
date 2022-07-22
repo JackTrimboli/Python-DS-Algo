@@ -8,10 +8,8 @@
 
 
 [7, 12, 3, 4, 6, 1]
-[7, 12, 3], [4,6,1]
 
-[7] [12, 3],   [4] [6,1]
-[7] [12] [3] [4] [6] [1]
+
 '''
 
 
@@ -46,6 +44,35 @@ def mergeSort(a):
         i += 1
 
 
+def mergeSortByMemory(A):
+    # BASE CASE: is the length of the array less than 2?
+    if len(A) < 2:
+        return
+
+    midpoint = len(A) // 2
+    left = A[:midpoint]
+    right = A[midpoint:]
+    mergeSortByMemory(left)
+    mergeSortByMemory(right)
+
+    # now merge the arrays
+    i = 0
+    while len(left) != 0 and len(right) != 0:
+        if left[0] < right[0]:
+            A[i] = left.pop(0)
+        else:
+            A[i] = right.pop(0)
+        i += 1
+
+    while len(left) != 0:
+        A[i] = left.pop(0)
+        i += 1
+
+    while len(right) != 0:
+        A[i] = right.pop(0)
+        i += 1
+
+
 a = [7, 12, 3, 4, 6, 1]
-mergeSort(a)
+mergeSortByMemory(a)
 print(a)

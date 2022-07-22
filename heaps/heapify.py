@@ -5,6 +5,8 @@
 '''
 from heapq import heapify
 
+# turns an array into a max heap
+
 
 def buildMaxHeap(A):
     for i in range((heapSize(A) // 2), 0, -1):
