@@ -3,9 +3,71 @@
 - should do it in place, not through insertion
 - assuming the first index is index 1
 '''
-from heapq import heapify
 
 # turns an array into a max heap
+
+
+from heapq import heapify
+
+
+class Heap:
+    def __init__(self):
+        self.arr = []
+
+    def insert(self, el):
+        self.arr.append(el)
+        self.arr[0], self.arr[-1] = self.arr[-1], self.arr[0]
+        self.heapify_up(self.heap_size()-1)
+
+    def heapify_up(self, i):
+        # get the parent
+        parent = self.get_parent(i)
+
+        # check which is greater
+        if self.arr[i] > self.arr[parent]:
+            self.arr[i], self.arr[parent] = self.arr[parent], self.arr[i]
+            self.heapify_up(parent)
+
+    def delete(self):
+        # swap root with last element
+        self.arr[0], self.arr[-1] = self.arr[-1], self.arr[0]
+        # remove from heap
+        self.arr.pop()
+        # trickle down first element until it finds it's place
+        self.heapify_down(0)
+
+    def heapify_down(self, i):
+
+        left = self.get_left_child(i)
+        right = self.get_right_child(i)
+
+        # ensure that both children exist
+        if left < self.heap_size() - 1 and right < self.heap_size() - 1:
+            # check which child is larger
+            if self.arr[left] > self.arr[right]:
+                if self.arr[left] > self.arr[i]:
+                    self.arr[left], self.arr[i] = self.arr[i], self.arr[left]
+                    self.heapify_down(left)
+
+            else:
+                if self.arr[right] > self.arr[i]:
+                    self.arr[right], self.arr[i] = self.arr[i], self.arr[right]
+                    self.heapify_down(right)
+
+    def print_heap(self):
+        print(self.arr)
+
+    def get_parent(self, i):
+        return (i - 1) // 2
+
+    def get_right_child(self, i):
+        return i * 2 + 2
+
+    def get_left_child(self, i):
+        return i * 2 + 1
+
+    def heap_size(self):
+        return len(self.arr)
 
 
 def buildMaxHeap(A):
@@ -47,9 +109,24 @@ def parent(i):
     return i/2
 
 
-a = [None, 1, 2, 3, 4, 5, 6, 7]
+# a = [None, 1, 2, 3, 4, 5, 6, 7]
+# buildMaxHeap(a)
+# print(a)
+
+
+myHeap = Heap()
+a = [None, ]
+
+for e in range(1, 11):
+    myHeap.insert(e)
+    a.append(e)
+
 buildMaxHeap(a)
-print(a)
+myHeap.print_heap()
+myHeap.delete()
+myHeap.print_heap()
+myHeap.delete()
+myHeap.print_heap()
 
 
 '''

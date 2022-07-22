@@ -30,3 +30,23 @@ def quickSort(A, p, r):
 arr = [None, 6, 5, 4, 3, 2, 1]
 quickSort(arr, 1, len(arr)-1)
 print(arr)
+
+
+'''
+{ 10, 80, 30, 90, 40, 50, 70}
+
+
+
+'''
+
+
+def quick_sort_from_mem(A, p, r):
+    if p < r:
+        q = parition(A, p, r)
+        # pass all values AROUND the pivot
+        quick_sort_from_mem(A, p, q-1)
+        quick_sort_from_mem(A, q+1, r)
+
+
+def parition(A, pivot):
+    return

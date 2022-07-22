@@ -5,11 +5,16 @@
 # Recursive implementation of selection sort #
 
 def selectionSort_helper(arr, start):
+    # If the starting index is less than the last index, do the work.
     if start < len(arr) - 1:
         ndx = start
+        # for each value from the second idx to the last idx
         for i in range(start + 1, len(a)):
+            # check if the value is less than arr at start
             if arr[i] < arr[ndx]:
+                # if it is, swap
                 ndx = i
+        # swap start with smallest value in the array
         arr[ndx], arr[start] = arr[start], arr[ndx]
         selectionSort_helper(arr, start + 1)
 
