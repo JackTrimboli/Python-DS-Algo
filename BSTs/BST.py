@@ -22,7 +22,7 @@ class BST:
                 x = x.left
             else:
                 x = x.right
-        z.p = y
+        z.parent = y
 
         if y == None:
             self.root = z
@@ -30,6 +30,46 @@ class BST:
             y.left = z
         else:
             y.right = z
+
+    def delete(self, key):
+        # first find the key we want to delete
+        curr = self.root
+        while curr != None and curr.key != key:
+            if curr.key < key:
+                curr = curr.right
+            else:
+                curr = curr.left
+        # now that we have found the node, we have to determine it's status
+        if curr == None:
+            return False
+        # is leaf:
+        if curr.left is None and curr.right is None:
+            if curr.parent.right == curr:
+                curr.parent.right = None
+            else:
+                curr.parent.left = None
+            return True
+        # has just left child:
+        if curr.left != None and curr.right == None:
+            curr.left.parent = curr.parent
+            curr = curr.left
+            return True
+        # has just right child:
+        elif curr.right != None and curr.left == None:
+            curr.right.parent = curr.parent
+            curr = curr.right
+            return True
+        # Has two children
+        else:
+            # replacement should contain the smallest value of the right subtree
+            replacement = self.minimum_as_node(curr.right)
+            # swap the keys
+            curr.key = replacement.key
+            if replacement.right != None:
+                replacement = replacement.right
+            else:
+                replacement.parent = None
+            return True
 
     def inorder(self):
         # nodes should print sorted
@@ -58,6 +98,12 @@ class BST:
         while n.left is not None:
             n = n.left
         return n.key
+
+    def minimum_as_node(self):
+        n = self.root
+        while n.left is not None:
+            n = n.left
+        return n
 
     def maximum(self):
         n = self.root
@@ -88,15 +134,19 @@ class BST:
 
         return x is not None
 
+    def height(self):
+        return self.height_helper(self.root)
+
+    def height_helper(self, x):
+        if x is None:
+            return -1
+        lh = self.height_helper(x.left)
+        rh = self.height_helper(x.right)
+        return 1 + max(lh, rh)
+
 
 t = BST()
 for e in [11, 16, 15, 12, 4, 20, 60]:
     t.insert(e)
 
-print("contains 12?: ", t.contain(12))
-
-print("contains 5?: ", t.contain(5))
-
-print("contains 12?: ", t.contain_iterative(12))
-
-print("contains 5?: ", t.contain_iterative(5))
+print(t.height())

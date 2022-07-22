@@ -20,7 +20,6 @@ def maxHeapify(A, i):
         largest = l
     else:
         largest = i
-
     if r <= heapSize(A) and A[r] > A[largest]:
         largest = r
 
