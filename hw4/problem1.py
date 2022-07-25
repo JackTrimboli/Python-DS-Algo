@@ -40,8 +40,39 @@ Explanation: There is only one stick, so you don't need to do anything. The tota
 '''
 import heapq
 
+# min heapify implementation:
 
-def connectSticks(self, sticks: list[int]) -> int:  # heapify the stick array
+
+def build_min_heap(arr):
+    for i in range(len(arr)//2, 0, -1):
+        minHeapify(arr, i)
+
+
+def minHeapify(arr, i):
+    l = left(i)
+    r = right(i)
+    if l <= len(arr)-1 and r <= len(arr)-1:
+        if (arr[i] > arr[l] or arr[i] > arr[r]):
+            if arr[l] < arr[r]:
+                arr[i], arr[l] = arr[l], arr[i]
+                minHeapify(arr, l)
+            else:
+                arr[i], arr[r] = arr[r], arr[i]
+                minHeapify(arr, r)
+
+
+def left(i):
+    return 2*i+1
+
+
+def right(i):
+    return 2*i+2
+
+# IMPLEMENTATION WITH HEAPQ MODULE
+
+
+def connectSticks(sticks: list[int]) -> int:  # heapify the stick array
+
     heapq.heapify(sticks)
 
     cost = 0
@@ -56,9 +87,30 @@ def connectSticks(self, sticks: list[int]) -> int:  # heapify the stick array
     return minCost
 
 
-'''
-Greedy algo
-combine two smallest
-merge
-repeat
-'''
+# IMPLEMENTATION WITH MY OWN HEAP:
+
+def connectSticks2(sticks: list[int]) -> int:  # heapify the stick array
+
+    build_min_heap(sticks)
+
+    cost = 0
+    minCost = 0
+    while len(sticks) > 1:
+        cost += sticks.pop(0)
+        build_min_heap(sticks)
+
+        cost += sticks.pop(0)
+        minCost += cost
+
+        sticks.append(cost)
+        build_min_heap(sticks)
+        cost = 0
+
+    return minCost
+
+
+print(connectSticks([2, 4, 3]))
+print(connectSticks([1, 8, 3, 5]))
+
+print(connectSticks2([2, 3, 4]))
+print(connectSticks2([1, 3, 5, 8]))

@@ -23,7 +23,24 @@ def selectionSort(a):
     selectionSort_helper(a, 0)
 
 
+def selectionSortByMemory_helper(A, i):
+    ndx = i
+    for j in range(i+1, len(A)):
+        if A[j] < A[ndx]:
+            ndx = j
+
+    A[ndx], A[i] = A[i], A[ndx]
+    selectionSort_helper(A, i + 1)
+
+
+def selectionSortByMemory(A):
+    selectionSortByMemory_helper(A, 0)
+
+
 a = [7, 3, 0, 1, 4]
+b = [7, 3, 0, 1, 4]
 selectionSort(a)
 print(a)
+selectionSortByMemory(b)
+print(b)
 # OUTPUT: [0, 1, 3, 4, 7]

@@ -7,9 +7,6 @@
 # turns an array into a max heap
 
 
-from heapq import heapify
-
-
 class Heap:
     def __init__(self):
         self.arr = []
@@ -70,8 +67,14 @@ class Heap:
         return len(self.arr)
 
 
+# def heapsort(A):
+#     for i in range(len(A)-1, 1, -1):
+#         A[i], A[0] = A[0], A[i]
+#         maxHeapify(A, i)
+
+
 def buildMaxHeap(A):
-    for i in range((heapSize(A) // 2), 0, -1):
+    for i in range((heapSize(A) // 2 - 1), 0, -1):
         maxHeapify(A, i)
 
 
@@ -98,15 +101,15 @@ def heapSize(A):
 
 
 def left(i):
-    return 2*i
-
-
-def right(i):
     return 2*i+1
 
 
+def right(i):
+    return 2*i+2
+
+
 def parent(i):
-    return i/2
+    return (i-1)/2
 
 
 # a = [None, 1, 2, 3, 4, 5, 6, 7]
@@ -115,18 +118,20 @@ def parent(i):
 
 
 myHeap = Heap()
-a = [None, ]
+a = []
 
 for e in range(1, 11):
     myHeap.insert(e)
     a.append(e)
 
 buildMaxHeap(a)
-myHeap.print_heap()
-myHeap.delete()
-myHeap.print_heap()
-myHeap.delete()
-myHeap.print_heap()
+heapsort(a)
+print(a)
+# myHeap.print_heap()
+# myHeap.delete()
+# myHeap.print_heap()
+# myHeap.delete()
+# myHeap.print_heap()
 
 
 '''

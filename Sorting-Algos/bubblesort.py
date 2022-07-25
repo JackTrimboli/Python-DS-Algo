@@ -15,23 +15,23 @@ def bubbleSort(a):
     bubbleSort_helper(a, len(a))
 
 
-def bubbleSortByMemory_helper(A, end):
-    if end != 0:
-        flag = False
-        for i in range(0, end - 1):
-            if A[i] > A[i + 1]:
-                flag = True
-                A[i], A[i + 1] = A[i], A[i + 1]  # "bubble up" larger elements
-        if flag:
-            bubbleSort_helper(A, end - 1)
+def bubblesortByMemory(A):
+    bubblesortByMemoryHelper(A, 0)
 
 
-def bubbleSortByMemory(A):
-    bubbleSortByMemory_helper(A, len(A))
+def bubblesortByMemoryHelper(A, i):
+    flag = False
+    nxt = i + 1
+    for i in range(len(A)-1):
+        if A[i] > A[i+1]:
+            flag = True
+            A[i], A[i+1] = A[i+1], A[i]
+    if flag:
+        bubblesortByMemoryHelper(A, nxt)
 
 
 a = [7, 3, 0, 1, 4]
-bubbleSortByMemory(a)
+bubblesortByMemory(a)
 print(a)
 
 
