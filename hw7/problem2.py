@@ -27,3 +27,35 @@ Example 3:
 Input: candidates = [2], target = 1
 Output: []
 '''
+
+res = []
+
+
+def getUniqueCombos(candidates, target):
+    getCombos(0, [], 0, candidates, target)
+    return res
+
+
+def getCombos(i, curr, currSum, candidates, target):
+    # base case (bad combo): idx out of bounds or the current sum is greater than target
+    if i >= len(candidates) or currSum > target:
+        return
+
+    # base case (good combo): we've hit our target, add combination to result and return
+    if currSum == target:
+        res.append(curr.copy())
+        return
+
+    # if the base cases aren't hit, make two dfs calls: one where we add candidates[i] to our sum and one where we do not
+    curr.append(candidates[i])
+    getCombos(i, curr, currSum+candidates[i], candidates, target)
+
+    curr.pop()
+    getCombos(i+1, curr, currSum, candidates, target)
+
+
+print(getUniqueCombos([2, 3, 6, 7], 7))
+res = []
+print(getUniqueCombos([2, 3, 5], 8))
+res = []
+print(getUniqueCombos([2], 1))

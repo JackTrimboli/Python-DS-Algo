@@ -36,3 +36,21 @@ Input: nums = [5,4,-1,7,8]
 
 Output: 23
 '''
+
+
+def getMaxSubArray(arr):
+    # from 1 to n
+    for i in range(1, len(arr)):
+        # if prev idx is a positive value
+        if arr[i-1] > 0:
+            # add the prev idx to curr idx
+            arr[i] += arr[i-1]
+    # return the sum of the max subarray
+    return max(arr)
+
+# Testcases:
+
+
+print(getMaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+print(getMaxSubArray([1]))
+print(getMaxSubArray([5, 4, -1, 7, 8]))
