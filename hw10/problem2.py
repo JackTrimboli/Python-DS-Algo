@@ -33,4 +33,6 @@ def getNumConnected(n, edges):
 
 # testcases:
 print(getNumConnected(5, [[0, 1], [1, 2], [3, 4]]))
+
+
 print(getNumConnected(5, [[0, 1], [1, 2], [2, 3], [3, 4]]))
